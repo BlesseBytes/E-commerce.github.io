@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offers</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+       /* General styles */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #050505;
+    background-color: #f4f4f4;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #2613d3;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.header-text {
+    margin-left: 20px;
+    color: #fff;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-text p {
+    margin: 5px 0 0;
+    font-size: 16px;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon {
+    font-size: 24px;
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.3s;
+}
+
+.cart-icon:hover {
+    color: #ebf0f6;
+}
+
+.logout-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #e55b50;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #d44a39;
+    transform: scale(1.05);
+}
+
+/* Navigation menu styles */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding: 15px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.nav-menu a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Main content styles */
+main {
+    padding: 20px;
+}
+
+.offers-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.offer-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.offer-card img {
+    width: 100%;
+    height: auto;
+}
+
+.offer-card h3 {
+    margin: 15px 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.offer-card p {
+    margin: 0 0 15px;
+    font-size: 16px;
+    color: #555;
+}
+
+.offer-card button {
+    padding: 12px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 10px;
+}
+
+.offer-card button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Loading Spinner */
+.spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #f56e0e;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Payment Popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.popup h3 {
+    margin-top: 0;
+}
+
+.popup button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 5px;
+}
+
+.popup button:hover {
+    background-color: #0056b3;
+}
+
+.popup .close-btn {
+    background-color: #e55b50;
+}
+
+.popup .close-btn:hover {
+    background-color: #d44a39;
+}
+
+/* Notification Bar */
+.notification-bar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745; /* Green for success */
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 2px solid #1e7e34;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+}
+
+.notification-bar.error {
+    background-color: #dc3545; /* Red for error */
+    border-bottom: 2px solid #c82333;
+}
+
+.notification-bar .close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+.notification-bar .close-btn:hover {
+    color: #e9ecef;
+}
+
+/* Lower Content styles */
+.lower-content {
+    position: relative;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 20px;
+    min-height: 60px;
+}
+
+.lower-content .back-to-home {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+    border: 2px solid #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.lower-content .back-to-home:hover {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Footer styles */
+footer {
+    background-color: #fff;
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* View Details Button */
+.view-details-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 10px; /* Adjust spacing as needed */
+}
+
+.view-details-btn:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* Modal Styles */
+.modal-details {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    padding: 20px;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.modal-details h2 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.modal-details p {
+    font-size: 16px;
+    color: #555;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e55b50;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-close-btn:hover {
+    background-color: #d44a39;
+}
+
+/* Notification Bar Styles */
+.notification-bar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #28a745;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 2px solid #218838;
+    transition: transform 0.3s;
+    z-index: 1001;
+}
+
+.notification-bar.error {
+    background-color: #dc3545;
+    border-bottom: 2px solid #c82333;
+}
+
+.notification-bar button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.notification-bar button:hover {
+    color: #ddd;
+}
+
+/* Popup Notification Styles */
+.popup-notification {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    padding: 20px;
+    z-index: 1000;
+    text-align: center;
+    position: relative;
+}
+
+.popup-notification h3 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.popup-notification p {
+    font-size: 16px;
+    color: #555;
+}
+
+.popup-notification .rating {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #777;
+}
+
+.popup-notification button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.popup-notification button:hover {
+    background-color: #0056b3;
+}
+
+.popup-notification .close-btn {
+    background: none;
+    border: none;
+    color: #e55b50;
+    font-size: 18px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.popup-notification .close-btn:hover {
+    color: #d44a39;
+}
+
+.close-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.close-btn:hover {
+    background-color: darkred;
+}
+
+#notification-bar {
+    background-color: #f44336; /* Red for error notifications */
+    color: white;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+#notification-bar.success {
+    background-color: #4CAF50; /* Green for success notifications */
+}
+
+#notification-bar.error {
+    background-color: #f44336; /* Red for error notifications */
+}
+
+.close-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.close-btn:hover {
+    background-color: darkred;
+}
+
+#notification-bar {
+    background-color: #f44336; /* Red for error notifications */
+    color: white;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+#notification-bar.success {
+    background-color: #4CAF50; /* Green for success notifications */
+}
+
+#notification-bar.error {
+    background-color: #f44336; /* Red for error notifications */
+}
+
+/* styles.css */
+.close-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.close-btn:hover {
+    background-color: darkred;
+}
+
+#notification-bar {
+    background-color: #f44336; /* Red for error notifications */
+    color: white;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    display: none;
+    z-index: 1000; /* Ensure it is on top of other elements */
+}
+
+#notification-bar.success {
+    background-color: #4CAF50; /* Green for success notifications */
+}
+
+#notification-bar.error {
+    background-color: #f44336; /* Red for error notifications */
+}
+
+
+.popup-notification {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    padding: 20px;
+    z-index: 1000;
+    text-align: center;
+}
+
+.popup-notification .close-btn {
+    background: none;
+    border: none;
+    color: #e55b50;
+    font-size: 18px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.popup-notification .close-btn:hover {
+    color: #d44a39;
+}
+
+.view-wishlist {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Button color */
+    color: #fff; /* Text color */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+.view-wishlist:hover {
+    background-color: #0056b3; /* Darker color on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.view-wishlist:active {
+    background-color: #003d7a; /* Even darker color when clicked */
+    transform: scale(0.95); /* Slightly shrink on click */
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Store Logo">
+        </div>
+        <div class="header-text">
+            <h1>Amazing Store</h1>
+            <p>Your one-stop shop for the latest phones!</p>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </nav>
+    
+
+    <!-- Main Content -->
+    <main>
+        <h2>Special Offers %</h2>
+        <div class="offers-section">
+           <!-- Offer Card 1 -->
+<div class="offer-card">
+    <img src="https://m.media-amazon.com/images/I/61ufE2FHl7L.jpg" alt="iPhone 14 Pro Max">
+    <h3>iPhone 14 Pro Max</h3>
+    <p>Discounted price: $999.99</p>
+    <button onclick="viewProductDetails('iPhone 14 Pro Max', 'This is an amazing phone with great features including a stunning display, powerful processor, and excellent camera...', '4.8')">View Details</button>
+    <button onclick="buyNow('iPhone 14 Pro Max', '$999.99')">Buy Now</button>
+    <button onclick="addToWishlist('iPhone 14 Pro Max')">Add to Wishlist</button>
+</div>
+
+<!-- Offer Card 2 -->
+<div class="offer-card">
+    <img src="https://m.media-amazon.com/images/I/71Sa3dqTqzL._AC_UF894,1000_QL80_.jpg" alt="Samsung Galaxy S23 Ultra">
+    <h3>Samsung Galaxy S23 Ultra</h3>
+    <p>Discounted price: $1,199.99</p>
+    <button onclick="viewProductDetails('Samsung Galaxy S23 Ultra', 'This phone comes with a stunning camera and performance, offering the best of Android technology...', '4.7')">View Details</button>
+    <button onclick="buyNow('Samsung Galaxy S23 Ultra', '$1,199.99')">Buy Now</button>
+    <button onclick="addToWishlist('Samsung Galaxy S23 Ultra')">Add to Wishlist</button>
+</div>
+
+<!-- Offer Card 3 -->
+<div class="offer-card">
+    <img src="https://media.wired.com/photos/5dae0207c96358000859e5a9/1:1/w_903,h_903,c_limit/Gear-Google-Pixel-4-Front-and-Back-SOURCE-Google.jpg" alt="Google Pixel 4">
+    <h3>Google Pixel 4</h3>
+    <p>Discounted price: $699.99</p>
+    <button onclick="viewProductDetails('Google Pixel 4', 'Experience cutting-edge technology with this phone, featuring exceptional AI capabilities and a fantastic camera...', '4.5')">View Details</button>
+    <button onclick="buyNow('Google Pixel 4', '$699.99')">Buy Now</button>
+    <button onclick="addToWishlist('Google Pixel 4')">Add to Wishlist</button>
+</div>
+
+        </div>
+        <!-- Product Details Modal -->
+        <div id="popupNotification" class="popup-notification" style="display: none;">
+            <button class="close-btn" onclick="closeProductModal()">×</button>
+            <h3 id="popupTitle">Title</h3>
+            <p id="popupDescription">Description</p>
+            <p id="popupRating">Rating: 0</p>
+        </div>
+
+
+    <!-- Modal structure -->
+<div id="popupNotification" class="popup-notification">
+    <button class="close-btn" onclick="closeProductModal()">×</button>
+    <h3 id="popupTitle">Title</h3>
+    <p id="popupDescription">Description</p>
+    <p id="popupRating">Rating: 0</p>
+</div>
+    </main>
+
+    <!-- Lower Content -->
+    <div class="lower-content">
+        <a href="Wishlist.html" class="view-wishlist">View Wishlist</a> <<<<<<<
+        <a href="home.html" class="back-to-home">Back to Home</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Our Amazing Store. All rights reserved.</p>
+    </footer>
+
+    <!-- Loading Spinner -->
+    <div id="spinner" class="spinner"></div>
+
+    <!-- Payment Popup -->
+    <div id="paymentPopup" class="popup">
+        <h3>Confirm Your Purchase</h3>
+        <p id="popupMessage"></p>
+        <button onclick="confirmPurchase()">Confirm</button>
+        <button class="close-btn" onclick="cancelPurchase()">Cancel</button>
+        <!-- Close button for the popup -->
+    </div>
+
+    <!-- Popup Element -->
+    <div id="paymentPopup" style="display: none;">
+        <p>Are you sure you want to cancel the purchase?</p>
+        <button class="close-btn" onclick="cancelPurchase()">Cancel</button>
+        <button onclick="confirmPurchase()">Confirm</button>
+    </div>
+
+    <!-- Notification Bar -->
+    <div id="notification-bar">
+        <span id="notification-text"></span>
+    </div>
+
+    <!-- Notification Bar -->
+    <div id="notificationBar" class="notification-bar"></div>
+
+
+    
+    <script>
+     // Function to log out
+function logout() {
+    alert('Logging out...');
+    // Add actual logout functionality here
+    window.location.href = 'login.html';  // Redirect to login page
+}
+
+// Function to initiate a purchase
+function buyNow(product, price) {
+    // Show the loading spinner
+    document.getElementById('spinner').style.display = 'block';
+
+    // Simulate loading time
+    setTimeout(function() {
+        // Hide the loading spinner
+        document.getElementById('spinner').style.display = 'none';
+
+        // Show the payment popup with product details
+        const popup = document.getElementById('paymentPopup');
+        document.getElementById('popupMessage').textContent = `You are about to purchase ${product} for ${price}.`;
+        popup.style.display = 'block';
+    }, 2000); // Simulates a 2-second delay for the loading spinner
+}
+
+// Function to confirm purchase
+function confirmPurchase() {
+    closePopup();
+
+    // Show success notification
+    const notificationBar = document.getElementById('notification-bar');
+    notificationBar.classList.remove('error');
+    notificationBar.classList.add('success');
+    document.getElementById('notification-text').innerText = 'Successful! Your order is being processed.🛒Please Click Cart to Continue.. ';
+    notificationBar.style.display = 'block';
+
+    // Hide notification bar after 5 seconds
+    setTimeout(function() {
+        notificationBar.style.display = 'none';
+    }, 10000);
+
+    // Simulate order summary
+    alert('Order Summary:\nProduct: Example Phone\nPrice: $499.99\nStatus: Awaiting delivery');
+}
+
+// Function to cancel purchase
+function cancelPurchase() {
+    closePopup();
+
+    // Show error notification
+    const notificationBar = document.getElementById('notification-bar');
+    notificationBar.classList.remove('success');
+    notificationBar.classList.add('error');
+    document.getElementById('notification-text').innerText = 'Unsuccessful. Your order was not processed.';
+    notificationBar.style.display = 'block';
+
+    // Hide notification bar after 5 seconds
+    setTimeout(function() {
+        notificationBar.style.display = 'none';
+    }, 5000);
+
+    // Simulate order summary
+    alert('Order was not completed.');
+}
+
+// Function to close the payment popup
+function closePopup() {
+    document.getElementById('paymentPopup').style.display = 'none';
+}
+
+// Function to add an item to the wishlist
+function addToWishlist(product) {
+    alert(`${product} has been added to your wishlist!`);
+    // Add actual wishlist functionality here
+}
+
+/// Function to view product details in a modal
+function viewProductDetails(title, description, rating) {
+    document.getElementById('popupTitle').innerText = title;
+    document.getElementById('popupDescription').innerText = description;
+    document.getElementById('popupRating').innerText = `Rating: ${rating}`;
+    document.getElementById('popupNotification').style.display = 'block';
+}
+
+// Function to close the product details modal
+function closeProductModal() {
+    document.getElementById('popupNotification').style.display = 'none';
+}
+
+
+// Function to show a notification bar
+function showNotification(message, type = 'success') {
+    const notificationBar = document.getElementById('notification-bar');
+    notificationBar.classList.remove('error', 'success');
+    if (type === 'error') {
+        notificationBar.classList.add('error');
+    } else {
+        notificationBar.classList.add('success');
+    }
+    document.getElementById('notification-text').innerText = message;
+    notificationBar.style.display = 'block';
+    setTimeout(() => {
+        notificationBar.style.transform = 'translateY(-100%)';
+    }, 3000); // Hide notification after 3 seconds
+}
+
+// Function to close the notification bar
+function closeNotification() {
+    document.getElementById('notification-bar').style.display = 'none';
+}
+
+// Select the Buy Now button
+const buyNowButton = document.querySelector('#buyNowButton'); // Make sure to set the correct ID
+
+// Handle Buy Now button click
+buyNowButton.addEventListener('click', () => {
+    window.location.href = 'cart.html';
+});
+
+// Select the Add to Wishlist button
+const addToWishlistButton = document.querySelector('#addToWishlistButton'); // Make sure to set the correct ID
+
+// Handle Add to Wishlist button click
+addToWishlistButton.addEventListener('click', () => {
+    window.location.href = 'wishlist.html';
+});
+
+    </script>
+</body>
+</html>

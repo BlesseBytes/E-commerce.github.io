@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read More Reviews</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #050505;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #2613d3;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        .header-text {
+            margin-left: 20px;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .header-text p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            color: #e0e0e0;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .cart-icon:hover {
+            color: #ebf0f6;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e55b50;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #d44a39;
+            transform: scale(1.05);
+        }
+
+        /* Banner slider styles */
+        .banner {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            display: block;
+        }
+
+        .nav-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+
+        .nav-buttons button {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .nav-buttons button:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+            transform: scale(1.1);
+        }
+
+        /* Navigation menu styles */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            background-color: #fff;
+            padding: 15px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-menu a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Main content styles */
+        main {
+            padding: 20px;
+        }
+
+        .reviews-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .reviews-section h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .review {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .review-avatar {
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+        }
+
+        .review-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .review-info strong {
+            font-size: 1.2em;
+        }
+
+        .review-info span {
+            font-size: 1em;
+            color: #f39c12;
+        }
+
+        .load-more {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        #load-more-btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #load-more-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Lower Content styles */
+        .lower-content {
+            position: relative;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 20px;
+            min-height: 60px; /* Adjust the height if needed */
+        }
+
+        .lower-content .back-to-home {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .lower-content .back-to-home:hover {
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Social Media Links */
+    .social-media {
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin: 20px 0;
+    }
+
+    .social-media h3 {
+        margin-top: 0;
+    }
+
+    .social-media a {
+        color: #007bff;
+        margin: 0 10px;
+    }
+
+    .social-media a:hover {
+        text-decoration: underline;
+    }
+
+        
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Logo">
+            <div class="header-text">
+                <h1>Amazing Store</h1>
+                <p>Welcome to our E-Commerce WebPage! Browse our products and enjoy shopping.</p>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </header>
+    
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="reviews-section">
+            <h2>Customer Reviews</h2>
+            <div class="review">
+                <div class="review-header">
+                    <img src="user.png" alt="User 1" class="review-avatar">
+                    <div class="review-info">
+                        <strong>Jane Doe</strong>
+                        <span>⭐⭐⭐⭐⭐</span>
+                    </div>
+                </div>
+                <p>"Great products and amazing service! The delivery was prompt and the quality exceeded my expectations. Highly recommend!"</p>
+            </div>
+            <div class="review">
+                <div class="review-header">
+                    <img src="user.png" alt="User 2" class="review-avatar">
+                    <div class="review-info">
+                        <strong>John Smith</strong>
+                        <span>⭐⭐⭐⭐</span>
+                    </div>
+                </div>
+                <p>"The product is good but the customer service could be improved. Overall, a positive shopping experience."</p>
+            </div>
+            <div class="review">
+                <div class="review-header">
+                    <img src="user.png" alt="User 3" class="review-avatar">
+                    <div class="review-info">
+                        <strong>Alice Johnson</strong>
+                        <span>⭐⭐⭐⭐⭐</span>
+                    </div>
+                </div>
+                <p>"Fantastic quality and fast shipping. I will definitely shop here again. The product was exactly as described."</p>
+            </div>
+            <!-- Additional reviews will be dynamically added here -->
+        </div>
+
+        <!-- Load More Reviews Button -->
+        <div class="load-more">
+            <button id="load-more-btn">Load More Reviews</button>
+        </div>
+    </main>
+
+    <!-- Lower Content -->
+    <div class="lower-content">
+        <a href="home.html" class="back-to-home">Back to Home</a>
+    </div>
+    <lower-content><!-- Social Media Links -->
+        <div class="social-media">
+            <h3>Follow Us</h3>
+            <a href="https://facebook.com" target="_blank">Facebook</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a> |
+            <a href="https://instagram.com" target="_blank">Instagram</a></lower-content>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Our Amazing Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for the banner slider
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.banner .slide');
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.banner .slide');
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            const slides = document.querySelectorAll('.banner .slide');
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlide(currentSlide);
+            setInterval(nextSlide, 5000); // Auto-slide every 5 seconds
+        });
+
+        // JavaScript for loading more reviews
+        document.getElementById('load-more-btn').addEventListener('click', () => {
+            const reviewsSection = document.querySelector('.reviews-section');
+            const newReviews = `
+                <div class="review">
+                    <div class="review-header">
+                        <img src="user.png" alt="User 4" class="review-avatar">
+                        <div class="review-info">
+                            <strong>Emily Davis</strong>
+                            <span>⭐⭐⭐⭐</span>
+                        </div>
+                    </div>
+                    <p>"The product met my expectations, but the delivery took longer than anticipated. Still a good experience overall."</p>
+                </div>
+                <div class="review">
+                    <div class="review-header">
+                        <img src="user.png" alt="User 5" class="review-avatar">
+                        <div class="review-info">
+                            <strong>Michael Lee</strong>
+                            <span>⭐⭐⭐⭐⭐</span>
+                        </div>
+                    </div>
+                    <p>"Excellent service and high-quality products. I will definitely be shopping here again. Highly recommended!"</p>
+                </div>
+            `;
+            reviewsSection.insertAdjacentHTML('beforeend', newReviews);
+        });
+
+        // JavaScript for logout functionality
+        function logout() {
+            // You can replace this with actual logout logic
+            alert('You have been logged out!');
+            window.location.href = 'login.html'; // Redirect to login page or other page
+        }
+    </script>
+</body>
+</html>

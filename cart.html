@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+       body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #050505;
+    background-color: #f4f4f4;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #2613d3;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.header-text {
+    margin-left: 20px;
+    color: #fff;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-text p {
+    margin: 5px 0 0;
+    font-size: 16px;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon {
+    font-size: 24px;
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.3s;
+}
+
+.cart-icon:hover {
+    color: #ebf0f6;
+}
+
+.logout-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #e55b50;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #d44a39;
+    transform: scale(1.05);
+}
+
+/* Navigation Menu Styles */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding: 15px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.nav-menu a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Main content styles */
+main {
+    padding: 20px;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    transition: box-shadow 0.3s;
+}
+
+.cart-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.item-quantity {
+    margin-left: auto;
+}
+
+.cart-summary {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.cart-summary p {
+    font-size: 18px;
+    margin: 0;
+}
+
+.cart-summary button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.cart-summary button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Footer Styles */
+footer {
+    background-color: #fff;
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+footer p {
+    margin: 0;
+}
+
+.back-to-home {
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+    border: 2px solid #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+}
+
+.back-to-home:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Modal and Notification Styles */
+.popup-notification {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    text-align: center;
+    width: 300px;
+}
+
+.popup-notification img {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 10px;
+}
+
+.popup-notification h3 {
+    margin: 10px 0;
+}
+
+.popup-notification p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.popup-notification .close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Checkout Notification Styles */
+.checkout-notification {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    background-color: #4CAF50;
+    color: #fff;
+    border: 2px solid #388E3C;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+}
+
+.notification-content {
+    position: relative;
+}
+
+.notification-content h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.notification-content p {
+    margin: 10px 0 0;
+}
+
+/* Close button for notification */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #ddd;
+}
+
+/* Loading Notification Styles */
+#loadingNotification {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #555;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+}
+
+#loadingNotification img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+#loadingNotification h3 {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+#loadingNotification p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Cart Item Quantity Input */
+.cart-item input[type="number"] {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.cart-item {
+    background-color: #ee9056;
+}
+
+.cart-item input[type="number"]::-webkit-inner-spin-button,
+.cart-item input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.cart-item input[type="number"]:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Cart Item Removal Button */
+.cart-item button {
+    background-color: #e55b50;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.cart-item button:hover {
+    background-color: #d44a39;
+    transform: scale(1.05);
+}
+/* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
+            z-index: 1000;
+            color: #333;
+            font-size: 14px;
+            border-left: 4px solid;
+        }
+
+        .notification.success {
+            border-color: #28a745; /* Green border */
+        }
+
+        .notification.error {
+            border-color: #dc3545; /* Red border */
+        }
+
+        .notification.info {
+            border-color: #007bff; /* Blue border */
+        }
+
+
+        /* Add new styles for dynamic updates here if needed */
+    </style>
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Logo">
+        </div>
+        <div class="header-text">
+            <h1>Your Shopping Cart</h1>
+            <p>Review and proceed to checkout</p>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">&#128722;</a>
+            <a href="login.html" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <nav class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </nav>
+
+    <main>
+        <div class="cart-items">
+            <!-- Cart Item 1 -->
+            <div class="cart-item">
+                <img src="https://m.media-amazon.com/images/I/61ufE2FHl7L.jpg" alt="iPhone 14 Pro Max">
+                <div class="item-details">
+                    <h2>iPhone 14 Pro Max</h2>
+                    <p>Price: $999.99</p>
+                </div>
+                <div class="item-quantity">
+                    Quantity:
+                    <input type="number" value="1" min="1">
+                </div>
+                <button class="remove-item">Remove</button>
+            </div>
+    
+            <!-- Cart Item 2 -->
+            <div class="cart-item">
+                <img src="https://m.media-amazon.com/images/I/71Sa3dqTqzL._AC_UF894,1000_QL80_.jpg" alt="Samsung Galaxy S23 Ultra">
+                <div class="item-details">
+                    <h2>Samsung Galaxy S23 Ultra</h2>
+                    <p>Price: $1,199.99</p>
+                </div>
+                <div class="item-quantity">
+                    Quantity:
+                    <input type="number" value="1" min="1">
+                </div>
+                <button class="remove-item">Remove</button>
+            </div>
+    
+            <!-- Cart Item 3 -->
+            <div class="cart-item">
+                <img src="https://media.wired.com/photos/5dae0207c96358000859e5a9/1:1/w_903,h_903,c_limit/Gear-Google-Pixel-4-Front-and-Back-SOURCE-Google.jpg" alt="Google Pixel 4">
+                <div class="item-details">
+                    <h2>Google Pixel 4</h2>
+                    <p>Price: $699.99</p>
+                </div>
+                <div class="item-quantity">
+                    Quantity:
+                    <input type="number" value="1" min="1">
+                </div>
+                <button class="remove-item">Remove</button>
+            </div>
+        </div>
+    </main>
+    
+        </div>
+
+        <div class="cart-summary">
+            <div id="cart-summary">
+                <p>Total Price: <span id="total-price">$0.00</span></p>
+            </div>
+            <button id="checkoutButton">Process to Checkout</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+        <a href="home.html" class="back-to-home">Back to Home</a>
+    </footer>
+
+    <!-- Checkout Notification -->
+    <div id="loadingNotification" class="checkout-notification">
+        <img src="Loading.webp" alt="Loading">
+        <div class="notification-content">
+            <h3>Processing Order</h3>
+            <p>Please wait while we process your order.</p>
+        </div>
+    </div>
+    
+
+    <!-- Popup Notification -->
+    <div id="popupNotification" class="popup-notification">
+        <img src="sucess.webp" alt="Success">
+        <div class="notification-content">
+            <h3>Payment Successful!</h3>
+            <p>Your order has been placed successfully.</p>
+        </div>
+        <button class="close-btn" onclick="closeNotification()">X</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkoutButton = document.getElementById('checkoutButton');
+            const loadingNotification = document.getElementById('loadingNotification');
+            const popupNotification = document.getElementById('popupNotification');
+            const totalPriceElem = document.getElementById('totalPrice');
+            let totalPrice = 0;
+
+            // Calculate total price (example)
+            function calculateTotal() {
+                totalPrice = 0;
+                document.querySelectorAll('.cart-item').forEach(item => {
+                    const price = parseFloat(item.getAttribute('data-price') || 0);
+                    const quantity = parseInt(item.querySelector('input[type="number"]').value || 1);
+                    totalPrice += price * quantity;
+                });
+                totalPriceElem.textContent = totalPrice.toFixed(2);
+            }
+
+            // Handle checkout button click
+            checkoutButton.addEventListener('click', () => {
+                loadingNotification.style.display = 'block';
+
+                setTimeout(() => {
+                    loadingNotification.style.display = 'none';
+                    popupNotification.style.display = 'block';
+
+                    setTimeout(() => {
+                        window.location.href = 'receipt.html';
+                    }, 4000);
+                }, 3000);
+            });
+
+            // Close notification
+            window.closeNotification = function () {
+                popupNotification.style.display = 'none';
+            };
+
+            // Initialize total price
+            calculateTotal();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+    const cartItems = document.querySelectorAll('.cart-item');
+    const totalPriceElement = document.getElementById('total-price');
+
+    function updateTotalPrice() {
+        let total = 0;
+        cartItems.forEach(item => {
+            const price = parseFloat(item.querySelector('.item-details p').textContent.replace('Price: $', ''));
+            const quantity = parseInt(item.querySelector('.item-quantity input').value, 10);
+            total += price * quantity;
+        });
+        totalPriceElement.textContent = `$${total.toFixed(2)}`;
+    }
+
+    function setupEventListeners() {
+        cartItems.forEach(item => {
+            const removeButton = item.querySelector('.remove-item');
+            const quantityInput = item.querySelector('.item-quantity input');
+
+            removeButton.addEventListener('click', () => {
+                item.remove();
+                updateTotalPrice();
+            });
+
+            quantityInput.addEventListener('change', () => {
+                updateTotalPrice();
+            });
+        });
+    }
+
+    // Initial setup
+    setupEventListeners();
+    updateTotalPrice();
+});
+
+
+    </script>
+</body>
+</html>

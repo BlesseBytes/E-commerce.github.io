@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset some default styles */
+body, h1, p, form {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #050505;
+    background-color: #f4f4f4;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #2613d3;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.header-text {
+    margin-left: 20px;
+    color: #fff;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-text p {
+    margin: 5px 0 0;
+    font-size: 16px;
+    color: white;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon {
+    font-size: 24px;
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.3s;
+}
+
+.cart-icon:hover {
+    color: #ebf0f6;
+}
+
+.logout-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #e55b50;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #d44a39;
+    transform: scale(1.05);
+}
+
+/* Navigation menu styles */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding: 15px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.nav-menu a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #0056b3;
+    transform: translateY(-2px);
+}
+
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.contact-form-section {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.confirmation-message {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+.confirmation-message.success {
+    color: #28a745;
+}
+
+.confirmation-message.error {
+    color: #dc3545;
+}
+
+/* Notification Popup Styles */
+.notification-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+    z-index: 1000;
+}
+
+.notification-content {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.success .icon {
+    color: #28a745;
+}
+
+.error .icon {
+    color: #dc3545;
+}
+
+.success .icon::before {
+    content: '✔'; /* Checkmark symbol */
+}
+
+.error .icon::before {
+    content: '✘'; /* Cross symbol */
+}
+
+.success {
+    border-color: #28a745;
+}
+
+.error {
+    border-color: #dc3545;
+}
+
+.notification-popup.show {
+    display: block;
+}
+
+  /* Footer styles */
+  footer {
+            background-color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Lower Content styles */
+        .lower-content {
+            position: relative;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 20px;
+            min-height: 60px; /* Adjust the height if needed */
+        }
+
+        .lower-content .back-to-home {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .lower-content .back-to-home:hover {
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Social Media Links */
+    .social-media {
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin: 20px 0;
+    }
+
+    .social-media h3 {
+        margin-top: 0;
+    }
+
+    .social-media a {
+        color: #007bff;
+        margin: 0 10px;
+    }
+
+    .social-media a:hover {
+        text-decoration: underline;
+    }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Store Logo">
+        </div>
+        <div class="header-text">
+            <h1>Amazing Store</h1>
+            <p>Your one-stop shop for the latest phones!</p>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <a href="login.html" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </nav>
+    <main>
+        <section class="contact-form-section">
+            <div class="container">
+                <h1>Contact Us</h1>
+                <p>We'd love to hear from you! Please fill out the form below, and we'll get back to you as soon as possible.</p>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+                
+                <div class="confirmation-message" id="confirmationMessage"></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="notification-popup" id="notificationPopup">
+        <div class="notification-content" id="notificationContent">
+            <span id="notificationIcon" class="icon"></span>
+            <p id="notificationMessage"></p>
+            <button class="close-button" onclick="closeNotification()">×</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    
+    // Simulate form submission
+    setTimeout(() => {
+        showNotification('Thank you for your message, ' + name + '! We will get back to you soon.', 'success');
+        
+        // Clear form
+        document.getElementById('contactForm').reset();
+    }, 1500); // Simulate delay for form submission
+});
+
+function showNotification(message, type) {
+    const popup = document.getElementById('notificationPopup');
+    const content = document.getElementById('notificationContent');
+    const icon = document.getElementById('notificationIcon');
+    const messageElem = document.getElementById('notificationMessage');
+    
+    // Set the notification type
+    content.className = 'notification-content ' + type;
+    icon.className = 'icon ' + type;
+    messageElem.innerText = message;
+    
+    // Show the notification
+    popup.classList.add('show');
+    
+    // Hide the notification after 4 seconds
+    setTimeout(() => {
+        popup.classList.remove('show');
+    }, 4000);
+}
+
+function closeNotification() {
+    const popup = document.getElementById('notificationPopup');
+    popup.classList.remove('show');
+}
+
+    </script>
+</body>
+  <!-- Lower Content -->
+  <div class="lower-content">
+    <a href="home.html" class="back-to-home">Back to Home</a>
+    <!-- Social Media Links -->
+    <div class="social-media">
+        <h3>Follow Us</h3>
+        <a href="https://facebook.com" target="_blank">Facebook</a> |
+        <a href="https://twitter.com" target="_blank">Twitter</a> |
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Our Amazing Store. All rights reserved.</p>
+</footer>
+</html>

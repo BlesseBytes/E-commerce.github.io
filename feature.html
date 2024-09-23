@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional CSS for Features Page */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #050505;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #2613d3;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        .header-text {
+            margin-left: 20px;
+            color: #fff;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header-text p {
+            margin: 5px 0 0;
+            font-size: 16px;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .cart-icon:hover {
+            color: #ebf0f6;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e55b50;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #d44a39;
+            transform: scale(1.05);
+        }
+
+        /* Navigation Menu Styles */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            background-color: #fff;
+            padding: 15px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-menu a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .features-container {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .feature-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            max-width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .feature-card-1 { background: #49a644; }
+        .feature-card-2 { background: #ca3c3c; }
+        .feature-card-3 { background: #d08c0e; }
+        .feature-card-4 { background: #361dc5; }
+
+        .feature-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .feature-card h2 {
+            font-size: 1.8em;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .feature-card p {
+            font-size: 1.1em;
+            color: #555;
+            margin: 0 0 15px;
+        }
+
+        .feature-card button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .feature-card button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Pop-up Bar Styles */
+        .popup-bar {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            border: 10px solid #007BFF;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 350px;
+            z-index: 1000;
+            transition: opacity 0.3s;
+            margin-top: 10px;
+        }
+
+        .popup-bar.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .popup-bar .close-btn {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .popup-bar .close-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .popup-bar p {
+            font-size: 1em;
+            color: #333;
+        }
+
+        /* CSS for Lower Content Description */
+        .description {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .description h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .description p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .back-to-home {
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .back-to-home:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Store Logo">
+        </div>
+        <div class="header-text">
+            <h1>Amazing Store</h1>
+            <p>Your one-stop shop for the latest phones!</p>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <a href="login.html" class="logout-btn">Logout</a>
+
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <h1>Feature Page</h1>
+        <div class="features-container">
+            <!-- Feature 1 -->
+            <div class="feature-card feature-card-1">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVwo0w-xmpMku4CgDiNbr0zgh1JFGekVv-0g&s" alt="Feature 1 Image">
+                <h2>Feature 1</h2>
+                <p>Description of Feature 1. This is an amazing feature with a lot of benefits.</p>
+                <button onclick="showPopup(this, 'Feature 1 details 😃🚀')">Learn More</button>
+                <div class="popup-bar">
+                    <button class="close-btn" onclick="closePopup(this)">Close</button>
+                    <p>Feature 1 details 😃🚀</p>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card feature-card-2">
+                <img src="https://protrans.com/wp-content/uploads/2019/07/Technology-300x200.png" alt="Feature 2 Image">
+                <h2>Feature 2</h2>
+                <p>Description of Feature 2. This feature is even more amazing and offers extra value.</p>
+                <button onclick="showPopup(this, 'Feature 2 details 📈💡')">Learn More</button>
+                <div class="popup-bar">
+                    <button class="close-btn" onclick="closePopup(this)">Close</button>
+                    <p>Feature 2 details 📈💡</p>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card feature-card-3">
+                <img src="https://www.datanami.com/wp-content/uploads/2021/10/gears_edge_shutterstock_-jijomathaidesigners-300x200.jpg" alt="Feature 3 Image">
+                <h2>Feature 3</h2>
+                <p>Description of Feature 3. Enjoy this outstanding feature for a top-notch experience.</p>
+                <button onclick="showPopup(this, 'Feature 3 details 🏆🔥')">Learn More</button>
+                <div class="popup-bar">
+                    <button class="close-btn" onclick="closePopup(this)">Close</button>
+                    <p>Feature 3 details 🏆🔥</p>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card feature-card-4">
+                <img src="https://effectivethoughts.net/wp-content/uploads/2022/12/blockchain-technology-300x200.jpg" alt="Feature 4 Image">
+                <h2>Feature 4</h2>
+                <p>Description of Feature 4. This feature sets new standards and excels in every aspect.</p>
+                <button onclick="showPopup(this, 'Feature 4 details 💎🌟')">Learn More</button>
+                <div class="popup-bar">
+                    <button class="close-btn" onclick="closePopup(this)">Close</button>
+                    <p>Feature 4 details 💎🌟</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lower Content Description -->
+        <div class="description">
+            <h2>Why Choose Us?</h2>
+            <p>At Amazing Store, we prioritize quality and customer satisfaction. Our products are carefully selected to meet the highest standards, ensuring you get the best experience. Explore our features and discover why we are the preferred choice for so many customers.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Amazing Store</p>
+        <a href="home.html" class="back-to-home">Back to Home</a>
+    </footer>
+
+    <script>
+        function showPopup(button, message) {
+            const popup = button.parentElement.querySelector('.popup-bar');
+            popup.querySelector('p').textContent = message;
+            popup.classList.add('active');
+        }
+
+        function closePopup(button) {
+            const popup = button.parentElement;
+            popup.classList.remove('active');
+        }
+        
+        function logout() {
+            // Add logout functionality here
+            alert('Logged out successfully!');
+        }
+    </script>
+</body>
+</html>

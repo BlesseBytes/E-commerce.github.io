@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAMSUNG Category</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional CSS for iPhone Category Page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* General Body Style */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #050505;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #2613d3;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        .header-text {
+            margin-left: 20px;
+            color: #fff;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header-text p {
+            margin: 5px 0 0;
+            font-size: 16px;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .cart-icon:hover {
+            color: #ebf0f6;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e55b50;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #d44a39;
+            transform: scale(1.05);
+        }
+
+        /* Navigation Menu Styles */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            background-color: #fff;
+            padding: 15px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-menu a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .category-container {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            border-radius: 10px;
+        }
+
+        .category-container h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fff;
+            text-align: center;
+            max-width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: scale(1.02);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product-card h2 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 1.2em;
+            color: #f00;
+            margin: 10px 0;
+        }
+
+        .product-card button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .product-card button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+            max-width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .notification .notification-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .notification .notification-content span {
+            margin-right: 10px;
+        }
+
+        .notification .notification-content .close-btn {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .back-to-home {
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .back-to-home:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Border style for new arrivals */
+        .new-arrival::before {
+            content: "New Arrival";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #e55b50;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            transform: rotate(-45deg);
+            transform-origin: 0 0;
+        }
+
+        .product-card {
+            position: relative;
+        }
+
+        /* Button and feature styles */
+        .feature-btn {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .feature-btn:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Store Logo">
+        </div>
+        <div class="header-text">
+            <h1>Amazing Store</h1>
+            <p>Your one-stop shop for the latest phones!</p>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <a href="login.html" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="category-container">
+            <h1>SAMSUNG</h1>
+            <div class="products-container">
+                <div class="product-card new-arrival">
+                    <img src="https://m.media-amazon.com/images/I/41Mjm1bB57L._QL92_SH45_SS200_.jpg" alt="Samsung Galaxy S21 Ultra">
+                    <h2>Samsung Galaxy S21 Ultra</h2>
+                    <p>$1,199.99</p>
+                    <p>256GB, Phantom Black</p>
+                    <button class="view-details" onclick="showViewDetails()">View Details</button>
+                    <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                    <button class="feature-btn" onclick="goToFeature()">Features</button>
+                </div>
+                <div class="product-card new-arrival">
+                    <img src="https://www.laptopsdirect.co.uk/Images/SM-S901BZWDEUB_1_LargeProductImage.png?v=5&width=200&height=200&switchoff=enabled" alt="Samsung Galaxy S22">
+                    <h2>Samsung Galaxy S22</h2>
+                    <p>$999.99</p>
+                    <p>128GB, Phantom White</p>
+                    <button class="view-details" onclick="showViewDetails()">View Details</button>
+                    <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                    <button class="feature-btn" onclick="goToFeature()">Features</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/51yk2qcSNxL._AC_SY200_QL15_.jpg" alt="Samsung Galaxy Z Flip3">
+                    <h2>Samsung Galaxy Z Flip3</h2>
+                    <p>$999.99</p>
+                    <p>256GB, Phantom Black</p>
+                    <button class="view-details" onclick="showViewDetails()">View Details</button>
+                    <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                    <button class="feature-btn" onclick="goToFeature()">Features</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://files.refurbed.io/ii/samsung-galaxy-a52-1621317719.jpg?eh=200&ew=200&h=200&t=resize&w=200" alt="Samsung Galaxy A52">
+                    <h2>Samsung Galaxy A52</h2>
+                    <p>$399.99</p>
+                    <p>128GB, Awesome Black</p>
+                    <button class="view-details" onclick="showViewDetails()">View Details</button>
+                    <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                    <button class="feature-btn" onclick="goToFeature()">Features</button>
+                </div>
+                <!-- Add more product cards as needed -->
+            </div>
+        </div>
+    </main>
+    
+
+    <!-- Notification Element -->
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <span id="notification-symbol">✔️</span>
+            <span id="notification-text">Notification message</span>
+            <button class="close-btn" onclick="closeNotification()">✖️</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Our Amazing Store. All rights reserved.</p>
+        <a href="home.html" class="back-to-home">Back to Home</a>
+    </footer>
+
+    <script>
+        function showNotification(message, symbol, redirectUrl = null) {
+            var notification = document.getElementById('notification');
+            var symbolElement = document.getElementById('notification-symbol');
+            var textElement = document.getElementById('notification-text');
+            
+            symbolElement.textContent = symbol;
+            textElement.textContent = message;
+            notification.style.display = 'block';
+
+            setTimeout(function() {
+                notification.style.display = 'none';
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                }
+            }, 3000);
+        }
+
+        function showViewDetails() {
+            showNotification('Viewing details for this product.', '🔍','viewdetail.html');
+        }
+
+        function addToCart() {
+            showNotification('Product added to cart.', '🛒', 'cart.html');
+        }
+
+        function goToFeature() {
+            showNotification('Loading feature details.', '✨', 'feature.html');
+        }
+
+        function closeNotification() {
+            document.getElementById('notification').style.display = 'none';
+        }
+
+        function logout() {
+            // Implement logout functionality here
+            alert('Logging out...');
+        }
+    </script>
+</body>
+</html>

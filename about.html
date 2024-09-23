@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Phone Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body, h1, h2, h3, p, button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #050505;
+    background-color: #f4f4f4;
+  }
+  
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #2613d3;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.header-text {
+    margin-left: 20px;
+    color: #fff;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-text p {
+    margin: 5px 0 0;
+    font-size: 16px;
+    color: white;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon {
+    font-size: 24px;
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.3s;
+}
+
+.cart-icon:hover {
+    color: #ebf0f6;
+}
+
+.logout-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #e55b50;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #d44a39;
+    transform: scale(1.05);
+}
+
+/* Navigation menu styles */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding: 15px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.nav-menu a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #0056b3;
+    transform: translateY(-2px);
+}
+
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Company Story Section */
+        .company-story {
+            background-color: #fff;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .company-story h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .company-story p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .read-more-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more-button:hover {
+            background-color: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Meet Our Team Section */
+        .meet-team {
+            margin-top: 40px;
+        }
+
+        .meet-team h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .team-member {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member img {
+            width: 100%;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .team-member h3 {
+            margin-bottom: 5px;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Products and Quality Section */
+        .product-quality {
+            margin-top: 40px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-quality h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .quality-points {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .quality-point {
+            flex: 1;
+            padding: 20px;
+            margin: 10px;
+            background-color: #e7e7e7;
+            border-radius: 8px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            margin-top: 40px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .testimonial {
+            min-width: 100%;
+            transition: transform 0.5s ease;
+            padding: 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .slider-button {
+            display: block;
+            margin: 0 auto;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .slider-button:hover {
+            background-color: #218838;
+        }
+
+        /* Footer styles */
+  footer {
+            background-color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Lower Content styles */
+        .lower-content {
+            position: relative;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 20px;
+            min-height: 60px; /* Adjust the height if needed */
+        }
+
+        .lower-content .back-to-home {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .lower-content .back-to-home:hover {
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Social Media Links */
+    .social-media {
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin: 20px 0;
+    }
+
+    .social-media h3 {
+        margin-top: 0;
+    }
+
+    .social-media a {
+        color: #007bff;
+        margin: 0 10px;
+    }
+
+    .social-media a:hover {
+        text-decoration: underline;
+    }
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Store Logo">
+        </div>
+        <div class="header-text">
+            <h1>Amazing Store</h1>
+            <p>Your one-stop shop for the latest phones!</p>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </nav>
+    <main>
+        <!-- Company Story Section -->
+        <section class="company-story">
+            <div class="container">
+                <h1>Our Story</h1>
+                <p id="storyText">
+                    At Phone Hub, we are passionate about technology and dedicated to providing the best mobile solutions to our customers. Founded in 2015, we started with a simple idea: to make the latest smartphones accessible to everyone...
+                </p>
+                <button class="read-more-button" onclick="toggleReadMore()">Read More</button>
+                <p id="fullStory" class="hidden">
+                    Our journey began with a small team of tech enthusiasts who believed in the power of innovation. We have grown into a leading provider of smartphones, accessories, and tech gadgets. Our mission is to offer top-quality products, exceptional customer service, and unbeatable prices. Over the years, we have served thousands of satisfied customers and continuously strive to bring the latest in mobile technology to the market.
+                </p>
+            </div>
+        </section>
+
+        <!-- Meet Our Team Section -->
+        <section class="meet-team">
+            <div class="container">
+                <h2>Meet Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="team1.jpg" alt="Team Member 1">
+                        <h3>John Doe</h3>
+                        <p>CEO & Founder</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="team2.jpg" alt="Team Member 2">
+                        <h3>Jane Smith</h3>
+                        <p>Head of Customer Support</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="team3.jpg" alt="Team Member 3">
+                        <h3>Mike Johnson</h3>
+                        <p>Lead Product Designer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="team4.jpg" alt="Team Member 4">
+                        <h3>Emily White</h3>
+                        <p>Marketing Strategist</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product and Quality Section -->
+        <section class="product-quality">
+            <div class="container">
+                <h2>Why Choose Us?</h2>
+                <div class="quality-points">
+                    <div class="quality-point">
+                        <h3>Premium Quality</h3>
+                        <p>We offer only the best and most reliable smartphones, tested for quality and durability.</p>
+                    </div>
+                    <div class="quality-point">
+                        <h3>Affordable Prices</h3>
+                        <p>Our pricing is competitive, and we offer great deals without compromising on quality.</p>
+                    </div>
+                    <div class="quality-point">
+                        <h3>Expert Support</h3>
+                        <p>Our dedicated support team is here to help you with any questions or issues you may have.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <h2>What Our Customers Say</h2>
+                <div class="testimonial-slider" id="testimonialSlider">
+                    <div class="testimonial">
+                        <p>"Phone Hub has a fantastic selection of phones at great prices. Their customer service is top-notch!"</p>
+                        <h4>- Customer A</h4>
+                    </div>
+                    <div class="testimonial">
+                        <p>"I bought my last three phones from Phone Hub, and each experience was flawless!"</p>
+                        <h4>- Customer B</h4>
+                    </div>
+                    <div class="testimonial">
+                        <p>"Highly recommend! Great quality products and amazing customer service."</p>
+                        <h4>- Customer C</h4>
+                    </div>
+                </div>
+                <button class="slider-button" onclick="nextTestimonial()">Next</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Toggle Read More for Company Story
+        function toggleReadMore() {
+            const fullStory = document.getElementById('fullStory');
+            const button = document.querySelector('.read-more-button');
+            
+            if (fullStory.classList.contains('hidden')) {
+                fullStory.classList.remove('hidden');
+                button.innerText = 'Read Less';
+            } else {
+                fullStory.classList.add('hidden');
+                button.innerText = 'Read More';
+            }
+        }
+
+        // Testimonial Slider Functionality
+        let currentTestimonial = 0;
+
+        function nextTestimonial() {
+            const slider = document.getElementById('testimonialSlider');
+            const testimonials = slider.querySelectorAll('.testimonial');
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            slider.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+        }
+
+        function logout() {
+    // Optional: Show a logout confirmation popup if needed
+    const confirmation = confirm("Are you sure you want to logout?");
+    
+    if (confirmation) {
+        // Redirect to login.html
+        window.location.href = "landingpage.html";
+    }
+}
+
+    </script>
+</body>
+</html>
+  <!-- Lower Content -->
+  <div class="lower-content">
+    <a href="home.html" class="back-to-home">Back to Home</a>
+    <!-- Social Media Links -->
+    <div class="social-media">
+        <h3>Follow Us</h3>
+        <a href="https://facebook.com" target="_blank">Facebook</a> |
+        <a href="https://twitter.com" target="_blank">Twitter</a> |
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Our Amazing Store. All rights reserved.</p>
+</footer>
+</html>

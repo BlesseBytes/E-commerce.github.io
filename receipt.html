@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Receipt</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+          /* General Body Style */
+          body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #050505;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #2613d3;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        .header-text {
+            margin-left: 20px;
+            color: #fff;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header-text p {
+            margin: 5px 0 0;
+            font-size: 16px;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .cart-icon:hover {
+            color: #ebf0f6;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e55b50;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #d44a39;
+            transform: scale(1.05);
+        }
+
+        /* Navigation Menu Styles */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            background-color: #fff;
+            padding: 15px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-menu a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .receipt-container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .receipt-header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #007bff;
+        }
+
+        .receipt-header p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .order-details {
+            margin-bottom: 20px;
+        }
+
+        .order-details h2 {
+            font-size: 22px;
+            margin: 0 0 10px;
+            color: #333;
+        }
+
+        .order-details p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .order-details .label {
+            font-weight: bold;
+        }
+
+        .order-summary {
+            border-top: 2px solid #e0e0e0;
+            padding-top: 10px;
+        }
+
+        .order-summary h2 {
+            font-size: 20px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .order-summary table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .order-summary table th, .order-summary table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .order-summary table th {
+            background-color: #f9f9f9;
+        }
+
+        .order-summary table td {
+            background-color: #fff;
+        }
+
+        .order-summary .total {
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .button-container a:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .back-to-home {
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .back-to-home:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (to be added) -->
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Store Logo">
+        </div>
+        <div class="header-text">
+            <h1>Amazing Store</h1>
+            <p>Your one-stop shop for the latest phones!</p>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <a href="login.html" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="receipt-container">
+        <div class="receipt-header">
+            <h1>Order Receipt</h1>
+            <p>Thank you for your purchase!</p>
+        </div>
+
+        <div class="order-details">
+            <h2>Order Details</h2>
+            <p><span class="label">Order Number:</span> #123456789</p>
+            <p><span class="label">Order Date:</span> September 11, 2024</p>
+            <p><span class="label">Shipping Address:</span> 1234 Elm Street, Springfield, IL, 62704</p>
+            <p><span class="label">Email:</span> customer@example.com</p>
+        </div>
+
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="order-items">
+                    <tr>
+                        <td>iPhone 14 Pro Max</td>
+                        <td class="quantity">1</td>
+                        <td class="price">$999.99</td>
+                        <td class="item-total">$999.99</td>
+                    </tr>
+                    <tr>
+                        <td>Samsung Galaxy S23 Ultra</td>
+                        <td class="quantity">1</td>
+                        <td class="price">$1,199.99</td>
+                        <td class="item-total">$1,199.99</td>
+                    </tr>
+                    <tr>
+                        <td>Google Pixel 4</td>
+                        <td class="quantity">1</td>
+                        <td class="price">$699.99</td>
+                        <td class="item-total">$699.99</td>
+                    </tr>
+                    <tr class="total">
+                        <td colspan="3">Subtotal</td>
+                        <td id="subtotal">$2,899.97</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Tax (10%)</td>
+                        <td id="tax">$289.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Discount (5%)</td>
+                        <td id="discount">-$144.99</td>
+                    </tr>
+                    <tr class="total">
+                        <td colspan="3">Total</td>
+                        <td id="final-total">$3,043.98</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Thank you for your purchase! Your order will be processed shortly.</p>
+            <button onclick="window.print()">Print Receipt</button>
+        </div>
+        
+        <div class="container">
+            <a>                         </a>
+        </div>
+    </div>
+
+    <!-- Footer (to be added) -->
+     <footer>
+        <p>&copy; 2024 Our Amazing Store. All rights reserved.</p>
+        <a href="home.html" class="back-to-home">Back to Home</a>
+     </footer>
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    function calculateOrderSummary() {
+        const itemRows = document.querySelectorAll('#order-items tr:not(.total)');
+        let subtotal = 0;
+
+        itemRows.forEach(row => {
+            const quantity = parseInt(row.querySelector('.quantity').textContent, 10);
+            const price = parseFloat(row.querySelector('.price').textContent.replace('$', ''));
+            const itemTotal = quantity * price;
+            subtotal += itemTotal;
+            row.querySelector('.item-total').textContent = `$${itemTotal.toFixed(2)}`;
+        });
+
+        const taxRate = 0.10; // 10% tax
+        const discountRate = 0.05; // 5% discount
+        const tax = subtotal * taxRate;
+        const discount = subtotal * discountRate;
+        const total = subtotal + tax - discount;
+
+        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+        document.getElementById('discount').textContent = `-$${discount.toFixed(2)}`;
+        document.getElementById('final-total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    calculateOrderSummary();
+});
+
+     </script>
+</body>
+</html>

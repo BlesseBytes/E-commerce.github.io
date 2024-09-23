@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2613d3;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        .logo img {
+            margin-right: 10px;
+            width: 100px;
+            height: 50px; 
+        }
+
+        .header-info {
+            max-width: 600px;
+            font-size: 0.9rem;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            color: #fff;
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+
+        .logout-btn {
+            background-color: #e55b50;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #d44a39;
+            transform: scale(1.05);
+        }
+
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .banner .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .banner .slide {
+            min-width: 100%;
+        }
+
+        .banner .slide img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .nav-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .nav-buttons button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .nav-buttons button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .left-aside, .right-aside {
+            background-color: #fff;
+            padding: 1rem;
+            border: 1px solid #d9d8d8;
+        }
+
+        .left-aside {
+            width: 20%;
+        }
+
+        .right-aside {
+            width: 20%;
+            text-align: center;
+        }
+
+        .left-aside img {
+            width: 100%;
+            height: 438px;
+            object-fit: cover;
+        }
+
+        .right-aside video {
+            width: 100%;
+            height: auto;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+        }
+
+        .categories {
+            margin-bottom: 1rem;
+        }
+
+        .categories h3 {
+            margin-top: 0;
+        }
+
+        .categories ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .categories ul li {
+            margin: 0.5rem 0;
+        }
+
+        .categories ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 0.5rem;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .categories ul li a:hover {
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .main-content {
+            width: 55%;
+            background-color: #fff;
+            padding: 1rem;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            height: 438px;
+            position: relative;
+            border: 1px solid #cac8c8;
+            border-radius: 5px;
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .lower-content {
+            background-color: #333;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ffffff;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+
+        .search-bar {
+            width: calc(100% - 2rem);
+            padding: 0.5rem;
+            margin: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: space-around;
+            background-color: #d44a39;
+            padding: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .nav-menu a:hover {
+            background-color: #3a2dae;
+        }
+
+        .prominent-btn, .wishlist-btn, .view-more-btn {
+            display: inline-block;
+            background-color: #ff6f61;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin: 0.5rem;
+        }
+
+        .prominent-btn:hover, .wishlist-btn:hover, .view-more-btn:hover {
+            background-color: #e55b50;
+            transform: scale(1.05);
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            max-width: 696px;
+            height: 438px;
+            overflow: hidden;
+            margin: 1rem auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tabs {
+            margin: 1rem 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .tab-buttons button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .tab-buttons button.active {
+            background-color: #e55b50;
+            color: #fff;
+            border-color: #e55b50;
+        }
+
+        .tab-buttons button:hover {
+            background-color: #ddd;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h3 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            color: #e55b50;
+        }
+
+        .tab-content p {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-aside, .right-aside {
+                width: 100%;
+            }
+
+            .main-content {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .back-to-home {
+         display: block;
+        margin: 1rem 0; /* Removed auto and added margin only on top and bottom */
+        margin-left: 0; /* Aligns the button to the left */
+        width: max-content;
+        text-decoration: none;
+        color: #fff;
+        background-color: #333;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        }
+
+        .back-to-home:hover {
+            background-color: #555;
+        }
+
+
+        right-aside {
+            width: 300px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        .right-aside video {
+            width: 100%; /* Make the video responsive */
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .right-aside p {
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+            /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Promotional Banner */
+    .promo-banner {
+        background-color: #d1d0d0;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #a6a6a6;
+        margin: 20px 0;
+    }
+
+    .promo-banner img {
+        width: 50%;
+        height: auto;
+        display: block;
+    }
+
+
+
+    .promo-banner p {
+        font-size: 1.2em;
+        margin: 10px 0;
+    }
+
+    .promo-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 1em;
+        border: none;
+        border-radius: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+    .promo-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .promo-banner {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+    .promo-banner img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .promo-banner p1 {
+        display: block;
+        font-size: 1.2em;
+        margin: 10px 0;
+        color: #333;
+    }
+
+    .promo-banner .special-offer {
+        background-color: #f9f9f9;
+        border: 2px solid #ddd;
+        padding: 10px;
+        margin: 20px 0;
+    }
+
+    .promo-banner .special-offer img {
+        max-width: 25%;
+        height: auto;
+    }
+
+    .promo-banner .special-offer p {
+        font-size: 1.1em;
+        color: #e53935;
+        margin: 10px 0;
+    }
+
+    .promo-btn {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .promo-btn:hover {
+        background-color: #0056b3;
+    }
+
+
+    /* Product Highlights Section */
+    .product-highlights {
+        background-color: #f9f9f9;
+        padding: 20px;
+        margin: 20px 0;
+        border: 1px solid #ddd;
+    }
+
+    .product-highlights h3 {
+        margin-top: 0;
+    }
+
+    .product-highlights ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .product-highlights li {
+        margin: 10px 0;
+    }
+
+    .product-highlights a {
+        color: #007bff;
+    }
+
+    .product-highlights a:hover {
+        text-decoration: underline;
+    }
+
+    /* Newsletter Signup Form */
+    .newsletter-signup {
+        background-color: #fff;
+        padding: 20px;
+        margin: 20px 0;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .newsletter-signup h3 {
+        margin-top: 0;
+    }
+
+    .newsletter-signup input[type="email"] {
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 70%;
+        max-width: 300px;
+        margin-right: 10px;
+        position: relative;
+    }
+
+    .subscribe-btn {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: #fff;
+        font-size: 1em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+    .subscribe-btn:hover {
+        background-color: #218838;
+    }
+
+    /* Social Media Links */
+    .social-media {
+        background-color: #404141;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin: 20px 0;
+    }
+
+    .social-media h3 {
+        margin-top: 0;
+    }
+
+    .social-media a {
+        color: #007bff;
+        margin: 0 10px;
+    }
+
+    .social-media a:hover {
+        text-decoration: underline;
+    }
+
+    /* Customer Reviews Section */
+    .customer-reviews {
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ddd;
+        margin: 20px 0;
+    }
+
+    .customer-reviews h3 {
+        margin-top: 0;
+    }
+
+    .customer-reviews p {
+        margin: 10px 0;
+    }
+
+    .read-more-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 1em;
+        border: none;
+        border-radius: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+    .read-more-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Modal Background */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0, 0, 0, 0.5); /* Black with transparency */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fff; /* White background */
+        margin: 10% auto; /* Centered */
+        padding: 30px 20px;
+        border-radius: 12px; /* Rounded corners */
+        width: 90%; /* Could be more or less, depending on screen size */
+        max-width: 400px; /* Maximum width */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow */
+        text-align: center; /* Center the text */
+        position: relative; /* For positioning elements */
+        animation: fadeIn 0.5s ease; /* Animation */
+    }
+
+    /* Close Button */
+    .close-btn {
+        color: #333; /* Dark close button */
+        float: right; /* Position to the right */
+        font-size: 24px; /* Large size */
+        font-weight: bold; /* Bold */
+        cursor: pointer; /* Pointer cursor on hover */
+        position: absolute; /* Absolute positioning */
+        top: 10px; /* Top margin */
+        right: 15px; /* Right margin */
+        transition: color 0.3s ease; /* Smooth transition */
+    }
+
+    /* Close Button Hover Effect */
+    .close-btn:hover,
+    .close-btn:focus {
+        color: #f44336; /* Red color on hover */
+        text-decoration: none; /* No underline */
+        cursor: pointer; /* Pointer cursor */
+    }
+
+    /* Modal Icon */
+    .modal-icon {
+        font-size: 50px; /* Large size */
+        color: #4CAF50; /* Green color for tick */
+        margin-bottom: 20px; /* Spacing below the icon */
+    }
+
+    /* Modal Text */
+    .modal-content p {
+        margin: 20px 0;
+        font-size: 18px; /* Font size */
+        color: #555; /* Slightly gray color */
+        line-height: 1.6; /* Better line height */
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Logo">
+        </div>
+        <div class="header-info">
+            <p>Welcome to Our Amazing Store WebPage! Browse our products and enjoy shopping.</p>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <div class="banner">
+        <div class="slides">
+            <div class="slide"><img src="banner.jpg" alt="Banner Slide 1"></div>
+            <div class="slide"><img src="banner1.jpg" alt="Banner Slide 2"></div>
+            <div class="slide"><img src="banner2.jpg" alt="Banner Slide 3"></div>
+            <div class="slide"><img src="banner3.jpg" alt="Banner Slide 4"></div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">❮</button>
+            <button onclick="nextSlide()">❯</button>
+        </div>
+    </div>
+
+    <div class="nav-menu">
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </div>
+
+    <div class="container">
+        <!-- Left Aside -->
+        <aside class="left-aside">
+            <div class="categories">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="category1.html">Iphone</a></li>
+                    <li><a href="category2.html">SAMSUNG</a></li>
+                    <li><a href="category3.html">HUAWEI</a></li>
+                    <li><a href="category4.html">OPPO</a></li>
+                </ul>
+            </div>
+            <img src="galaxy-z-flip-fold-samsung-product-promo-hoyle-2021.webp" alt="Sidebar Image">
+            <p>The Samsung Galaxy Z Flip is a revolutionary smartphone that brings a new perspective to the mobile experience 
+                with its cutting-edge foldable design. Combining sleek aesthetics with powerful performance,
+                 the Galaxy Z Flip fits comfortably in your pocket and unfolds to reveal a stunning 6.7-inch Dynamic AMOLED display.</p>
+                 <img src="iphone16promax.webp" alt="Sidebar Image">
+                 <p>The iPhone 16 Plus still has a 6.7-inch display,
+                     but the iPhone 16 Pro Max has a 6.9-inch display, giving it the crown for the biggest iPhone ever made.</p>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Product Slider -->
+            <div class="slider">
+                <div class="slides">
+                    <div class="slide"><img src="iphone16.webp" alt="Product Slide 1"></div>
+                    <div class="slide"><img src="Early-Samsung-Galaxy-S24-release-date-and-bold-Unpacked-event-location-choice-tipped.jpg" alt="Product Slide 2"></div>
+                    <div class="slide"><img src="mate-60-1-624x414.jpg" alt="Product Slide 3"></div>
+                </div>
+            </div>
+
+            <!-- Tabs Section -->
+            <div class="tabs">
+                <div class="tab-buttons">
+                    <button class="active" onclick="showTab('description')">Description</button>
+                    <button onclick="showTab('reviews')">Reviews</button>
+                </div>
+                <div id="description" class="tab-content active">
+                    <h3>Product Description</h3>
+                    <p>The Apple iPhone 16 sets a new standard for smartphones, combining state-of-the-art technology with refined aesthetics and unparalleled user experience. With significant upgrades in performance, camera technology, and display quality, the iPhone 16 is designed to offer a next-level mobile experience, tailored for tech enthusiasts, creatives, and everyday users alike.</p>
+                </div>
+                <div id="reviews" class="tab-content">
+                    <h3>Product Reviews</h3>
+                    <p>No reviews yet. Be the first to review this product!</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <a href="products.html" class="prominent-btn">Buy Now</a>
+            <a href="products.html" class="view-more-btn">View More</a>
+            <a href="wishlist.html" class="wishlist-btn">View Wishlist</a>
+            <a href="cart.html" class="view-more-btn">View Cart</a>
+
+            <!-- Additional Content Below the Video -->
+            <!-- Promotional Banner -->
+            <div class="promo-banner">
+                <img src="mobile-offers.jpg" alt="Promotional Banner" width="110%">
+                <p1>Upgrade your mobile experience with our newest smartphone release—and now,
+                     for a limited time, enjoy an incredible up to 70% OFF!!</p1>
+                <div class="special-offer">
+                <img src="SpecialBaner.jpg" alt="Special Offer Banner" width="100%">
+                <p>🌟 Special Offer Alert! 🌟 For this week only, get an additional 15% off on all clearance items! Use code CLEAR15 at checkout. Don’t miss out on these unbeatable prices!</p>
+            </div>
+                <p>Check out our latest offers! Don't miss out on exclusive deals.</p>
+                <a href="offers.html" class="promo-btn">View Offers</a>
+            </div>
+
+
+            <!-- Product Highlights Section -->
+            <div class="product-highlights">
+                <h3>Featured Products</h3>
+                <ul>
+                    <li><a href="product1.html">Product-Latest-Iphone</a> 🔍- Clcik to view more!</li>
+                    <li><a href="product2.html">Product-Latest-OPPO</a> 🔍- Clcik to view more!</li>
+                    <li><a href="product3.html">Product-Latest-SAMSUNG</a> 🔍- Clcik to view more!</li>
+                </ul>
+            </div>
+
+            
+            <!-- Customer Reviews Section -->
+            <div class="customer-reviews">
+                <h3>Customer Reviews</h3>
+                <p>"Great products and amazing service!" - Jane Doe</p>
+                <p>"Highly recommend to everyone." - John Smith</p>
+                <a href="reviews.html" class="read-more-btn">Read More Reviews</a>
+            </div>
+        </main>
+
+        <!-- Right Aside -->
+        <aside class="right-aside">
+            <video src="adsvideo.mp4" autoplay muted playsinline controls></video>
+            <h1>Join us now 🌟 50% off!!!</h1>
+            <video src="5086601-sd_640_360_30fps.mp4" autoplay muted playsinline controls></video>
+
+            <p>Transform your [industry or service area] experience with our top-rated [BookUs].
+                 Our expert team delivers exceptional results tailored to your needs, ensuring you get the best service possible.</p>
+        </aside>
+    </div>
+
+ 
+        
+        <!-- Newsletter Signup Form -->
+<div class="newsletter-signup">
+    <h3>Subscribe to Our Newsletter</h3>
+    <form id="newsletter-form">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit" class="subscribe-btn">Subscribe</button>
+    </form>
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <!-- Checkmark Icon -->
+        <div class="modal-icon">✔️</div>
+        <p>Thank you for subscribing to our newsletter.
+            <h3>You'll start receiving updates from us soon!</h>
+        </p>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+           <!-- Lower Content -->
+    <div class="lower-content">
+        <a href="index.html" class="back-to-home">Home</a>
+         <!-- Social Media Links -->
+         <div class="social-media">
+            <h3>Follow Us</h3>
+            <a href="https://facebook.com" target="_blank">Facebook</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a> |
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
+        <p>&copy; 2024 Our Amazing Store. All rights reserved.</p>
+    </footer>
+</body>
+
+    <script>
+        let currentSlide = 0;
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`#${tabId}`).classList.add('active');
+
+            document.querySelectorAll('.tab-buttons button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.querySelector(`.tab-buttons button[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+
+        function nextSlide() {
+            const slides = document.querySelector('.banner .slides');
+            const totalSlides = slides.children.length;
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function prevSlide() {
+            const slides = document.querySelector('.banner .slides');
+            const totalSlides = slides.children.length;
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+        
+
+        function logout() {
+    alert("You have been logged out.");
+    // Here, you would typically clear authentication tokens or perform logout actions
+    // For demonstration, we'll redirect to the login page.
+
+    // Replace 'login.html' with the actual path to your login form or page
+    window.location.href = 'login.html';
+}
+
+        setInterval(nextSlide, 5000); // Auto-slide every 5 seconds
+
+        // Modal Elements
+const modal = document.getElementById('modal');
+const closeModalBtn = document.querySelector('.close-btn');
+
+// Show the modal function
+function showModal(message) {
+    document.querySelector('#modal p').textContent = message;
+    modal.style.display = 'block';
+
+     // Auto-close the modal after 3 seconds (3000 milliseconds)
+     setTimeout(closeModal, 3000);
+}
+
+// Close the modal function
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+// Event listeners for closing the modal
+closeModalBtn.addEventListener('click', closeModal);
+window.addEventListener('click', function (event) {
+    if (event.target === modal) {
+        closeModal();
+    }
+});
+
+// Form submission logic
+document.getElementById('newsletter-form').addEventListener('submit', function (event) {
+    event.preventDefault();  // Prevent form from submitting to "subscribe.html"
+    showModal('Thank you for subscribing to our newsletter!');
+});
+
+        
+    </script>
+</body>
+</html>

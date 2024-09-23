@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional CSS for Products Page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #2613d3;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        .header-text {
+            margin-left: 20px;
+            color: #fff;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header-text p {
+            margin: 5px 0 0;
+            font-size: 16px;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .cart-icon:hover {
+            color: #ebf0f6;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e55b50;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #d44a39;
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            background-color: #fff;
+            padding: 15px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-menu a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .category-container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .category-container h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product-group {
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .product-group h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .products-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #eca67a;
+            text-align: center;
+            max-width: 250px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.02);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 1.2em;
+            color: #f00;
+            margin: 10px 0;
+        }
+
+        .product-card button {
+            background-color: #007BFF;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .product-card button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .notification-bar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            align-items: center;
+            z-index: 1000;
+            max-width: 300px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .notification-bar.success {
+            background-color: #28a745;
+        }
+
+        .notification-bar.error {
+            background-color: #dc3545;
+        }
+
+        .notification-symbol {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .notification-message {
+            flex-grow: 1;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .notification-close:hover {
+            color: #f00;
+        }
+
+        footer {
+            background-color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .back-to-home {
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .back-to-home:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .loading-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .loading-screen.active {
+            display: flex;
+        }
+
+        .loading-screen p {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        /* Loading and Details Styles */
+        .loading-details {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .loading-bar {
+            width: 80%;
+            height: 4px;
+            background: #007BFF;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #0056b3;
+            animation: loading 2s linear infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .details-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .details-content h2 {
+            margin: 0 0 20px;
+            color: #333;
+        }
+
+        .details-content p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .details-content button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .details-content button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Logo">
+        </div>
+        <div class="header-text">
+            <h1>Amazing Store</h1>
+            <p>Your one-stop shop for the latest phones!</p>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">&#128722;</a>
+            <a href="login.html" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="category-container">
+        <h1>Our Products</h1>
+        <div class="products-container">
+            <div class="product-group">
+                <h2>iPhone</h2>
+                <div class="products-row">
+                    <div class="product-card">
+                        <img src="https://media.extra.com/i/aurora/100260270_100_01?fmt=auto&w=720.jpg" alt="iPhone 12">
+                        <h3>iPhone 12</h3>
+                        <p>$699</p>
+                        <button onclick="showDetails('iPhone 12', 699)">View Details</button>
+                        <button onclick="addToCart('iPhone 12', 699)">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://store.istore.co.tz/cdn/shop/products/Blue_1839fb66-1f82-4667-ace2-77cd240821d7_1080x.jpg?v=1650887886.jpg" alt="iPhone 13">
+                        <h3>iPhone 13</h3>
+                        <p>$799</p>
+                        <button onclick="showDetails('iPhone 13', 799)">View Details</button>
+                        <button onclick="addToCart('iPhone 13', 799)">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://media.extra.com/i/aurora/100315671_100_01?fmt=auto&w=720.jpg" alt="iPhone 14">
+                        <h3>iPhone 14</h3>
+                        <p>$999</p>
+                        <button onclick="showDetails('iPhone 14', 999)">View Details</button>
+                        <button onclick="addToCart('iPhone 14', 999)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat similar blocks for other product categories -->
+            <div class="product-group">
+                <h2>Samsung</h2>
+                <div class="products-row">
+                    <div class="product-card">
+                        <img src="https://images.samsung.com/is/image/samsung/assets/au/smartphones/galaxy-s21-5g/buy/Buy_Page-KV-S21_Ultra-MO-720x720.jpg?imbypass=true.jpg" alt="Samsung Galaxy S21">
+                        <h3>Samsung Galaxy S21</h3>
+                        <p>$799</p>
+                        <button onclick="showDetails('Samsung Galaxy S21', 799)">View Details</button>
+                        <button onclick="addToCart('Samsung Galaxy S21', 799)">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.samsung.com/pk/smartphones/galaxy-s22-ultra/buy/S22_Ultra_ProductKV_White_MO.jpg" alt="Samsung Galaxy S22">
+                        <h3>Samsung Galaxy S22</h3>
+                        <p>$999</p>
+                        <button onclick="showDetails('Samsung Galaxy S22', 999)">View Details</button>
+                        <button onclick="addToCart('Samsung Galaxy S22', 999)">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://media.extra.com/i/aurora/100330496_100_01?fmt=auto&w=720" alt="Samsung Galaxy S23">
+                        <h3>Samsung Galaxy S23</h3>
+                        <p>$1199</p>
+                        <button onclick="showDetails('Samsung Galaxy S23', 1199)">View Details</button>
+                        <button onclick="addToCart('Samsung Galaxy S23', 1199)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Our Amazing Store. All rights reserved.</p>
+        <a href="home.html" class="back-to-home">Back to Home</a>
+    </footer>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <p>Processing your order...</p>
+    </div>
+
+    <!-- Loading Details Screen -->
+    <div id="loading-details" class="loading-details">
+        <div class="loading-bar"></div>
+        <div class="details-content">
+            <h2>Detail  Summary</h2>
+            <p id="order-details">Order details will appear here.</p>
+            <button onclick="closeDetails()">Close</button>
+        </div>
+    </div>
+
+    <!-- Notification Bar -->
+    <div id="notification-bar" class="notification-bar">
+        <span id="notification-symbol" class="notification-symbol"></span>
+        <span id="notification-message" class="notification-message"></span>
+        <button id="notification-close" class="notification-close">&times;</button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function showDetails(productName, price) {
+            // Display loading screen for 2 seconds
+            document.getElementById('loading-details').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('order-details').innerHTML = `Product: ${productName}<br>Price: $${price}`;
+                document.getElementById('loading-details').style.display = 'none';
+            }, 2000);
+        }
+
+        function addToCart(productName, price) {
+            // Show loading screen
+            document.getElementById('loading-screen').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+                showNotification('success', `${productName} added to cart successfully!`);
+            }, 2000);
+        }
+
+        function showNotification(type, message) {
+            const notificationBar = document.getElementById('notification-bar');
+            const notificationSymbol = document.getElementById('notification-symbol');
+            const notificationMessage = document.getElementById('notification-message');
+            const notificationClose = document.getElementById('notification-close');
+
+            notificationMessage.innerHTML = message;
+            notificationBar.className = `notification-bar ${type}`;
+            notificationSymbol.innerHTML = type === 'success' ? '&#10004;' : '&#10008;';
+            notificationBar.style.display = 'flex';
+
+            notificationClose.onclick = () => {
+                notificationBar.style.display = 'none';
+            };
+
+            setTimeout(() => {
+                notificationBar.style.display = 'none';
+            }, 3000);
+        }
+
+        function closeDetails() {
+            document.getElementById('loading-details').style.display = 'none';
+        }
+
+        function addToCart(productName, price) {
+    // Show loading screen
+    document.getElementById('loading-screen').style.display = 'flex';
+    setTimeout(() => {
+        document.getElementById('loading-screen').style.display = 'none';
+        showNotification('success', `${productName} added to cart successfully!`);
+        // Redirect to cart.html after showing the notification
+        setTimeout(() => {
+            window.location.href = 'cart.html';
+        }, 3000); // Delay to allow the notification to be visible
+    }, 2000);
+}
+
+    </script>
+</body>
+</html>

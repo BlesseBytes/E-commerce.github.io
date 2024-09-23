@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazing Store - Wishlist</title>
+    <style>
+        /* General Body Style */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #050505;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #2613d3;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        .header-text {
+            margin-left: 20px;
+            color: #fff;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header-text p {
+            margin: 5px 0 0;
+            font-size: 16px;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .cart-icon:hover {
+            color: #ebf0f6;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e55b50;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #d44a39;
+            transform: scale(1.05);
+        }
+
+        /* Navigation Menu Styles */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            background-color: #fff;
+            padding: 15px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-menu a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Wishlist Styles */
+        .wishlist-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .wishlist-item {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #ee9056;
+        }
+
+        .wishlist-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        /* Button Styles */
+        .wishlist-item button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff; /* Blue color */
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .wishlist-item button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: scale(1.05);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .back-to-home {
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .back-to-home:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
+            z-index: 1000;
+            color: #333;
+            font-size: 14px;
+            border-left: 4px solid;
+        }
+
+        .notification.success {
+            border-color: #28a745; /* Green border */
+        }
+
+        .notification.error {
+            border-color: #dc3545; /* Red border */
+        }
+
+        .notification.info {
+            border-color: #007bff; /* Blue border */
+        }
+
+        .notification span {
+            margin-right: 8px;
+        }
+
+         /* Social Media Links */
+    .social-media {
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin: 20px 0;
+    }
+
+    .social-media h3 {
+        margin-top: 0;
+    }
+
+    .social-media a {
+        color: #007bff;
+        margin: 0 10px;
+    }
+
+    .social-media a:hover {
+        text-decoration: underline;
+    }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Store Logo">
+        </div>
+        <div class="header-text">
+            <h1>Amazing Store</h1>
+            <p>Your one-stop shop for the latest phones!</p>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <a href="login.html" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="about.html">About Us</a>
+    </nav>
+
+    <!-- Wishlist Content -->
+    <div class="wishlist-container">
+        <h1>Your Wishlist</h1>
+        
+        <!-- Wishlist Item 1 -->
+        <div class="wishlist-item">
+            <img src="https://m.media-amazon.com/images/I/61ufE2FHl7L.jpg" alt="iPhone 14 Pro Max">
+            <div class="item-details">
+                <h3>iPhone 14 Pro Max</h3>
+                <p>Price: $999.99</p>
+                <button onclick="moveToCart('iPhone 14 Pro Max')">Move to Cart</button>
+                <button onclick="showNotification('iPhone 14 Pro Max has been removed from your wishlist.', 'error')">Remove</button>
+                <button onclick="showNotification('Viewing details for iPhone 14 Pro Max.', 'info')">View Details</button>
+            </div>
+        </div>
+
+        <!-- Wishlist Item 2 -->
+        <div class="wishlist-item">
+            <img src="https://m.media-amazon.com/images/I/71Sa3dqTqzL._AC_UF894,1000_QL80_.jpg" alt="Samsung Galaxy S23 Ultra">
+            <div class="item-details">
+                <h3>Samsung Galaxy S23 Ultra</h3>
+                <p>Price: $1,199.99</p>
+                <button onclick="moveToCart('Samsung Galaxy S23 Ultra')">Move to Cart</button>
+                <button onclick="showNotification('Samsung Galaxy S23 Ultra has been removed from your wishlist.', 'error')">Remove</button>
+                <button onclick="showNotification('Viewing details for Samsung Galaxy S23 Ultra.', 'info')">View Details</button>
+            </div>
+        </div>
+
+        <!-- Wishlist Item 3 -->
+        <div class="wishlist-item">
+            <img src="https://media.wired.com/photos/5dae0207c96358000859e5a9/1:1/w_903,h_903,c_limit/Gear-Google-Pixel-4-Front-and-Back-SOURCE-Google.jpg" alt="Google Pixel 4">
+            <div class="item-details">
+                <h3>Google Pixel 4</h3>
+                <p>Price: $699.99</p>
+                <button onclick="moveToCart('Google Pixel 4')">Move to Cart</button>
+                <button onclick="showNotification('Google Pixel 4 has been removed from your wishlist.', 'error')">Remove</button>
+                <button onclick="showNotification('Viewing details for Google Pixel 4.', 'info')">View Details</button>
+            </div>
+        </div>
+    </div>
+    
+    <lower-content>
+        <!-- Social Media Links -->
+<div class="social-media">
+    <h3>Follow Us</h3>
+    <a href="https://facebook.com" target="_blank">Facebook</a> |
+    <a href="https://twitter.com" target="_blank">Twitter</a> |
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+
+    </lower-content>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Amazing Store. All rights reserved.</p>
+        <a href="home.html" class="back-to-home">Back to Home</a>
+    </footer>
+
+    <!-- Notification Element -->
+    <div class="notification" id="notification">
+        <span>✔</span> <span id="notification-text">Notification Text</span>
+    </div>
+
+    <!-- JavaScript for Notifications -->
+    <script>
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+
+            notificationText.textContent = message;
+
+            // Set notification style based on type
+            if (type === 'success') {
+                notification.className = 'notification success';
+                notification.children[0].textContent = '✔'; // Success symbol
+            } else if (type === 'error') {
+                notification.className = 'notification error';
+                notification.children[0].textContent = '✖'; // Error symbol
+            } else if (type === 'info') {
+                notification.className = 'notification info';
+                notification.children[0].textContent = 'ℹ'; // Info symbol
+            }
+
+            // Show the notification
+            notification.style.display = 'block';
+
+            // Hide the notification after 3 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function moveToCart(productName) {
+            // Show notification
+            showNotification(`${productName} has been moved to your cart.`, 'success');
+
+            // Redirect to cart.html after the notification is hidden
+            setTimeout(() => {
+                window.location.href = 'cart.html';
+            }, 3000);
+        }
+
+        function logout() {
+            alert("Logging out... See you again!");
+        }
+        
+        
+    </script>
+</body>
+</html>

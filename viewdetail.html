@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #2613d3;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        .header-text {
+            margin-left: 20px;
+            color: #fff;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e55b50;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #d44a39;
+            transform: scale(1.05);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .product-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .product-image {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .product-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-info {
+            flex: 2;
+        }
+
+        .product-info h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #2613d3;
+        }
+
+        .product-info .price {
+            font-size: 1.8em;
+            margin: 20px 0;
+            color: #e55b50;
+        }
+
+        .product-info button {
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-right: 15px;
+        }
+
+        .product-info button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Loading Notification Styles */
+        .loading-notification {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .back-to-home {
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .back-to-home:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .popup-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4caf50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    animation: fadeIn 0.5s, fadeOut 0.5s 1.5s; /* Fades in and out */
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Logo">
+            <div class="header-text">
+                <h1>Amazing Store</h1>
+                <p>Welcome to our E-Commerce WebPage! Browse our products and enjoy shopping.</p>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <a href="cart.html" class="cart-icon">🛒</a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="product-detail">
+            <!-- Product Image -->
+            <div class="product-image">
+                <img src="iphone16promax.webp" alt="Product Image">
+            </div>
+
+           <!-- Product Information -->
+<div class="product-info">
+    <h1>iPhone 16 Pro Max</h1>
+    <p>The iPhone 16 Pro Max features cutting-edge technology, including a stunning display, powerful performance, and an advanced camera system. It's designed to deliver an exceptional user experience with unparalleled quality and speed.</p>
+    <p class="price">$999.99</p> <!-- Updated price for the iPhone 16 -->
+    <div class="quantity">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1">
+    </div>
+    <button onclick="addToCart()">Add to Cart</button>
+    <button onclick="buyNow()">Buy Now</button>
+</div>
+
+
+        <!-- Loading Notification -->
+        <div class="loading-notification" id="loadingNotification">
+            <p>Loading... Please wait.</p>
+        </div>
+    </div>
+    
+     <!-- Loading Notification -->
+     <div class="loading-notification" id="loadingNotification">
+        <p>Processing... Please wait.</p>
+    </div>
+</div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Amazing Store. All rights reserved.</p>
+        <a href="home.html" class="back-to-home">Back to Home</a>
+    </footer>
+
+    <script>
+        function addToCart() {
+            const quantity = document.getElementById('quantity').value;
+
+            // Show loading notification
+            document.getElementById('loadingNotification').style.display = 'block';
+
+            // Simulate adding to cart process
+            setTimeout(() => {
+                // Redirect to cart.html after loading
+                window.location.href = 'cart.html';
+            }, 3000);
+        }
+
+        function buyNow() {
+            const quantity = document.getElementById('quantity').value;
+
+        // Show loading notification
+        document.getElementById('loadingNotification').style.display = 'block';
+
+        // Simulate adding to cart process
+        setTimeout(() => {
+            // Redirect to cart.html after loading
+            window.location.href = 'receipt.html';
+        }, 3000);
+        }
+
+        function logout() {
+    // Show pop-up notification
+    const notification = document.createElement('div');
+    notification.className = 'popup-notification';
+    notification.innerHTML = "Logged out successfully! &#10003;"; // Checkmark symbol
+    document.body.appendChild(notification);
+
+    // Redirect to home.html after showing the notification
+    setTimeout(() => {
+        notification.remove();
+        window.location.href = 'landingpage.html';
+    }, 2000); // Adjust time as needed
+}
+
+    </script>
+</body>
+</html>
